@@ -1,0 +1,41 @@
+class Solution {
+  public:
+    // Function to detect cycle in a directed graph.
+    bool check(int node,vector<int> adj[],vector<int> &vis,vector<int> &dfs)
+    {
+        vis[node]=1;
+        dfs[node]=1;
+        for(auto i:adj[node])
+        {
+            if(!vis[i])
+            {
+                if(check(i,adj,vis,dfs))
+                {
+                 return true;   
+                }
+            }
+            else if(dfs[i])
+            {
+                return true;
+            }
+        }
+        dfs[node]=0;
+        return false;
+    }
+    bool isCyclic(int V, vector<int> adj[]) {
+        // code here
+        vector<int> vis(V,0);
+        vector<int> dfs(V,0);
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                 if(check(i,adj,vis,dfs))
+                {
+                 return true;   
+                }
+            }
+        }
+        return false;
+    }
+};
