@@ -9,15 +9,12 @@ public:
         unordered_map<string,int> m;
         for(int i=0;i<s.size()-9;i++)
         {
-            string p=s.substr(i, 10);
-            m[p]++;
+            m[s.substr(i, 10)]++;
         }
         for(auto& i : m)
         {
             if(i.second>1)
-            {
                 v.push_back(i.first);
-            }
         }
         return v;
 
