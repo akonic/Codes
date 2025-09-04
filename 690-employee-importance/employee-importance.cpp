@@ -14,8 +14,8 @@ public:
         
         int ans=0;
         int n=employees.size();
-        unordered_map<int,int> m;
-        unordered_map<int,vector<int>> adj;
+        vector<int> m(2001,-1);
+        vector<vector<int>> adj(2001);
         for(auto& i : employees)
         {
             m[i->id]=i->importance;
