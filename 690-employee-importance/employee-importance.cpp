@@ -14,8 +14,8 @@ public:
         
         int ans=0;
         int n=employees.size();
-        map<int,int> m;
-        map<int,vector<int>> adj;
+        unordered_map<int,int> m;
+        unordered_map<int,vector<int>> adj;
         for(auto& i : employees)
         {
             m[i->id]=i->importance;
@@ -24,7 +24,7 @@ public:
                 adj[i->id].push_back(j);
             }
         }
-         map<int,int> visited;
+         unordered_map<int,int> visited;
          queue<int> q;
         q.push(id);
         
