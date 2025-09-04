@@ -36,12 +36,12 @@ public:
             visited[id]=1;
             for(auto& j : adj[id] )
             {
-                if(visited[j]==0)
-                {
-                    q.push(j);
-                }
+                if(visited[j]==0)q.push(j);
+                
             }
-        }
+        }m.clear();
+        visited.clear();
+        adj.clear();
         return ans;
     }
 };
