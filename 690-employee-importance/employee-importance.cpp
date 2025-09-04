@@ -24,7 +24,7 @@ public:
                 adj[i->id].push_back(j);
             }
         }
-         unordered_map<int,int> visited;
+         vector<int> visited(2001,0);
          queue<int> q;
         q.push(id);
         
