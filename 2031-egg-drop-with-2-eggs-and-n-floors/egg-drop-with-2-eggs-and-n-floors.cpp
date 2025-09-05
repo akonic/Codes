@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[1001][1001];
+    int dp[3][1001];
     int fun(int e,int f)
     {
         if(f==0 || f==1)
