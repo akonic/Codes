@@ -12,32 +12,15 @@ public:
         }
     return c;
     }
-    // long fun(string beginWord, string endWord, vector<string>& wordList,int i)
-    // {
-    //     if(beginWord==endWord)
-    //     {
-    //         return 0;
-    //     }
-    //     if(i>=wordList.size())
-    //     {
-    //         return INT_MAX;
-    //     }
-    //     long ans=INT_MAX;
-    //     for(int j=i;j<wordList.size();j++)
-    //     {
-    //         if(diff(wordList[j],beginWord)==1)
-    //         {
-    //             ans=min(ans, 1 + fun(wordList[j],endWord,wordList,j+1));
-
-    //         }
-    //     }
-    //     return ans;
-    // }
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         unordered_map<string,int> m;
          for(int i=0;i<wordList.size();i++)
             {
                 m[wordList[i]]=INT_MAX;
+            }
+            if(m.find(endWord)==m.end())
+            {
+                return 0;
             }
         queue<string> q;
         long ans=INT_MAX;
