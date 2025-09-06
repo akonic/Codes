@@ -34,7 +34,7 @@ public:
     //     return ans;
     // }
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        map<string,int> m;
+        unordered_map<string,int> m;
          for(int i=0;i<wordList.size();i++)
             {
                 m[wordList[i]]=INT_MAX;
