@@ -1,53 +1,31 @@
 class Solution {
 public:
-    int diff(string s,string p)
-    {
-        int c=0;
-        for(int i=0;i<s.size();i++)
-        {
-            if(s[i]!=p[i])
-            {
-                c++;
-            }
-        }
-    return c;
-    }
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_map<string,int> m;
-         for(int i=0;i<wordList.size();i++)
-            {
-                m[wordList[i]]=INT_MAX;
-            }
-            if(m.find(endWord)==m.end())
-            {
-                return 0;
-            }
-        queue<string> q;
-        long ans=INT_MAX;
-        m[beginWord]=0;
-        q.push(beginWord);
-        while(!q.empty())
-        {
-            string p=q.front();
-            long cost=m[p];
-            q.pop();
-            if(p==endWord)
-            {
-                ans=min(ans,cost);
-            }
-            for(int i=0;i<wordList.size();i++)
-            {
-                if(diff(wordList[i],p)==1 && cost+1<m[wordList[i]])
-                {
-                    m[wordList[i]]=1+cost;
-                    q.push(wordList[i]);
+        unordered_set<string> words(wordList.begin(), wordList.end());
+        if (words.find(endWord) == words.end()) return 0;
+
+        queue<pair<string,int>> q;
+        q.push({beginWord, 1}); 
+        if (words.count(beginWord)) words.erase(beginWord);
+
+        while (!q.empty()) {
+            auto [cur, level] = q.front(); q.pop();
+            if (cur == endWord) return level;
+
+            string next = cur;
+            for (int i = 0; i < (int)cur.size(); ++i) {
+                char orig = next[i];
+                for (char c = 'a'; c <= 'z'; ++c) {
+                    if (c == orig) continue;
+                    next[i] = c;
+                    if (words.find(next) != words.end()) {
+                        q.push({next, level + 1});
+                        words.erase(next); // mark visited
+                    }
                 }
+                next[i] = orig;
             }
         }
-        if(ans==INT_MAX)
-        {
-            return 0;
-        }
-        return ans+1;
+        return 0;
     }
 };
