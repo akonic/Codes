@@ -11,13 +11,13 @@ int dp[501][501];
         {
             return dp[i][j];
         }
-        int ans=0;
+        int ans=0,a=fun(nums1,nums2,i+1,j+1),b=fun(nums1,nums2,i+1,j),c=fun(nums1,nums2,i,j+1);
         if(nums1[i]!=nums2[j])
         {
-            ans=max({fun(nums1,nums2,i+1,j+1),fun(nums1,nums2,i+1,j),fun(nums1,nums2,i,j+1)});
+            ans=max({a,b,c});
         }
         else{
-            ans=max({fun(nums1,nums2,i+1,j),fun(nums1,nums2,i,j+1),1+fun(nums1,nums2,i+1,j+1)});
+            ans=max({b,c,1+a});
         }
         return dp[i][j]=ans;
     }
