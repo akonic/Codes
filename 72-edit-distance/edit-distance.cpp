@@ -26,31 +26,27 @@ public:
     //     }
     //     return dp[i][j]=ans;
     // }
-    int minDistance(string word1, string word2) {
-        //memset(dp,-1,sizeof(dp));
-        int n=word1.size(),m=word2.size();
-        int dp[n+1][m+1];
-        for(int i=0;i<=n;i++)
-        {
-            for(int j=0;j<=m;j++)
-            {
-                if(i==0)
-                {
-                    dp[i][j]=j;
-                }
-                else if(j==0)
-                {
-                    dp[i][j]=i;
-                }
-                else if(word1[i-1]==word2[j-1])
-                {
-                    dp[i][j]=dp[i-1][j-1];
-                }
-                else{
-                    dp[i][j]=1+min({dp[i-1][j],dp[i-1][j-1],dp[i][j-1]});
-                }
+    int minDistance(string s1, string s2) {
+
+        int m = s1.size();
+        int n = s2.size();
+
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
+
+        // For 0-th row
+        for (int j = 0; j <= n; j++)
+            prev[j] = j;
+
+        for (int i = 1; i <= m; i++) {
+            curr[0] = i;
+            for (int j = 1; j <= n; j++) {
+                if (s1[i - 1] == s2[j - 1])
+                    curr[j] = prev[j - 1];
+                else
+                    curr[j] = 1 + min({curr[j - 1], prev[j], prev[j - 1]});
             }
+            prev = curr;
         }
-        return dp[n][m];
+        return prev[n];
     }
 };
