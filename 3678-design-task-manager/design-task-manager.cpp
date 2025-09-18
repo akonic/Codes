@@ -1,7 +1,7 @@
 class TaskManager {
 public:
     priority_queue<pair<int,int>> pq; // priority,taskId
-    map<int,pair<int,int>> m; // taskId,{userid,priority}
+    unordered_map<int,pair<int,int>> m; // taskId,{userid,priority}
     TaskManager(vector<vector<int>>& tasks) {
         for(auto& i : tasks)
         {
