@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxFrequencyElements(vector<int>& nums) {
         int x=INT_MIN;
-        unordered_map<int,int> m;
+        vector<int> m(101,0);
         for(auto& i:nums)
         {
             m[i]++;
@@ -11,7 +11,7 @@ public:
         int c=0;
         for(auto& i:m)
         {
-            if(i.second==x)
+            if(i==x)
             {
                 c+=x;
             }
