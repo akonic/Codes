@@ -21,6 +21,7 @@ public:
     }
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         s.clear();
+        sort(words.begin(),words.end());
         for(auto& i:words)
         {
             s.insert(i);
