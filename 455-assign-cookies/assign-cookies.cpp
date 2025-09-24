@@ -11,12 +11,9 @@ public:
             {
                 c++;
                 i++;
-                j++;
             }
-            else if(s[j]<g[i])
-            {
-                j++;
-            }
+            j++;
+
         }
         return c;
     }
