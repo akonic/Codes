@@ -2,7 +2,7 @@ class Solution {
 public:
     bool canArrange(vector<int>& arr, int k) {
         int c=0;
-        unordered_map<int,int> m;
+       vector<int> m(k,0);
         int n=arr.size();
         vector<int> v;
         for(int i=0;i<n;i++)
