@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int dp[101];
-    int fun(string s, int i) {
+
+    int fun(string s, int i,vector<int>& dp) {
         if (i == s.size()) {
             return 1;
         }
@@ -18,14 +18,15 @@ public:
 
         } else {
             if (i + 1 < s.size() && stoi(s.substr(i, 2)) < 27) {
-                c += fun(s, i + 2);
+                c += fun(s, i + 2,dp);
             }
-            c += fun(s, i + 1);
+            c += fun(s, i + 1,dp);
         }
 
         return dp[i]=c;
     }
     int numDecodings(string s) { 
-        memset(dp,-1,sizeof(dp));
-        return fun(s, 0); }
+         int n=s.size();
+        vector<int> dp(n+1, -1);
+        return fun(s, 0,dp); }
 };
