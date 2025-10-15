@@ -24,10 +24,7 @@ public:
                 }
             }
             ans=max(ans,x/2);
-           // cout<<i<<" "<<x<<" " <<k<<endl;
         }
-        k=x;
-        ans=max(ans,k/2);
         return ans;
     }
 };
