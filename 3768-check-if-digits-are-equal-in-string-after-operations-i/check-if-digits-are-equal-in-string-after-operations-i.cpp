@@ -4,16 +4,11 @@ public:
         string temp;
         while(s.size()>2)
         {
-            vector<int> v;
+            string temp;
             int n=s.size();
             for(int i=1;i<n;i++)
             {
-                v.push_back(((s[i-1]-'0') + (s[i]-'0'))%10);
-            }
-            string temp;
-            for(auto& i : v)
-            {
-                temp+=to_string(i);
+                temp+=to_string(((s[i-1]-'0') + (s[i]-'0'))%10);
             }
             s=temp;
         }
