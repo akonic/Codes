@@ -2,12 +2,12 @@ class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
         vector<int> v;
-        for(int i=0;i<bank.size();i++)
+        for(auto& i : bank)
         {
             int c=0;
-            for(int j=0;j<bank[i].size();j++)
+            for(auto& j : i)
             {
-                if(bank[i][j]=='1')
+                if(j=='1')
                 {
                     c++;
                 }
