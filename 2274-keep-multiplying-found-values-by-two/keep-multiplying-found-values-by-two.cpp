@@ -1,10 +1,10 @@
 class Solution {
 public:
     int findFinalValue(vector<int>& nums, int original) {
-        map<int,int> m;
+        unordered_map<int,bool> m;
         for(auto& i : nums)
         {
-            m[i]++;
+            m[i]=true;
         }
         while(1)
         {
