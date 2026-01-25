@@ -6,18 +6,19 @@ class Solution {
         int len=0;
         for(int i=0;i<n;i++)
         {
-            if(mp.containsKey(s.charAt(i)))
+            Character p = s.charAt(i);
+            if(mp.containsKey(p))
             {
                 ans=Math.max(len,ans);
                 int j = i-len;
-                while(mp.containsKey(s.charAt(i)))
+                while(mp.containsKey(p))
                 {
                     len--;
                     mp.remove(s.charAt(j));
                     j++;
                 }
             }
-                mp.put(s.charAt(i),1);len++;
+                mp.put(p,1);len++;
         }
         ans=Math.max(len,ans);
         return ans;
