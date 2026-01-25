@@ -12,8 +12,10 @@ class Solution {
          int len=1;
         for(Map.Entry<Integer,Integer> e : mp.entrySet())
         {
-           len=1;
-            int p=e.getKey();
+  int p=e.getKey();
+           if(mp.get(p)!=-1){
+            len=1;
+          
             while(mp.containsKey(p+1) && mp.get(p+1)!=-1)
             {
                 p++;
@@ -21,6 +23,7 @@ class Solution {
                 mp.replace(p,-1);
             }
             ans=Math.max(ans,len);
+           }
         }
          ans=Math.max(ans,len);
         return ans;
