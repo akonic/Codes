@@ -12,26 +12,27 @@ class Solution {
         int ans=0;
         for(int i=0;i<n;i++)
         {
-            if(s.charAt(i)=='I' && i+1<n && (s.charAt(i+1)=='V' || s.charAt(i+1)=='X'))
+            Character p= s.charAt(i);
+            if(p=='I' && i+1<n && (s.charAt(i+1)=='V' || s.charAt(i+1)=='X'))
             {
-               ans-=mp.get(s.charAt(i));
+               ans-=mp.get(p);
                i++;
                ans+=mp.get(s.charAt(i));
             }
-            else if(s.charAt(i)=='X' && i+1<n && (s.charAt(i+1)=='L' || s.charAt(i+1)=='C'))
+            else if(p=='X' && i+1<n && (s.charAt(i+1)=='L' || s.charAt(i+1)=='C'))
             {
-               ans-=mp.get(s.charAt(i));
+               ans-=mp.get(p);
                i++;
                ans+=mp.get(s.charAt(i));
             }
-            else if(s.charAt(i)=='C' && i+1<n && (s.charAt(i+1)=='D' || s.charAt(i+1)=='M'))
+            else if(p=='C' && i+1<n && (s.charAt(i+1)=='D' || s.charAt(i+1)=='M'))
             {
-               ans-=mp.get(s.charAt(i));
+               ans-=mp.get(p);
                i++;
                ans+=mp.get(s.charAt(i));
             }
             else{
-                ans+=mp.get(s.charAt(i));
+                ans+=mp.get(p);
             }
         }
         return ans;
