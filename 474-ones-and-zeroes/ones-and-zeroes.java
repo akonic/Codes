@@ -14,9 +14,9 @@ class Solution {
             return Integer.MIN_VALUE;
         if (i >= list.size())
             return 0;
-        if(dp[m][n][i]!=-1)
+        if(dp[i][m][n]!=-1)
         {
-            return dp[m][n][i];
+            return dp[i][m][n];
         }
         int a = 0, b = 0;
         int x = list.get(i).first, y = list.get(i).second;
@@ -24,7 +24,7 @@ class Solution {
             a = 1 + fun(m - x, n - y, i + 1, list,dp);
         }
         b = fun(m, n, i + 1, list,dp);
-        return dp[m][n][i]=Math.max(a, b);
+        return dp[i][m][n]=Math.max(a, b);
     }
 
     public int findMaxForm(String[] strs, int m, int n) {
@@ -44,7 +44,7 @@ class Solution {
             list.add(new Pair(a, b));
         }
         int ans = 0;
-        int[][][] dp = new int[m+1][n+1][list.size()+1];
+        int[][][] dp = new int [list.size()+1][m+1][n+1];
         for(int[][] rows : dp)
         {
             for(int[] cols : rows)
