@@ -1,34 +1,31 @@
 class Solution {
-    public long fun(int n,int i,int[][] dp)
-    {
-        if(n==0)
-        {
-            return 0;
+
+    static final int INF = (int)1e9;
+
+    public int fun(int n, int i, int[][] dp) {
+        if (n == 0) return 0;
+
+        if (i * i > n) return INF; 
+
+        if (dp[n][i] != -1) {
+            return dp[n][i];
         }
-        if(i>100)
-        {
-            return Integer.MAX_VALUE;
-        }
-        if(dp[n][i]!=-1)
-        {
-            return (long)dp[n][i];
-        }
-        long a=Integer.MAX_VALUE,b=Integer.MAX_VALUE;
-        if(n-(i*i)>=0)
-        {
-            a=1+fun(n-(i*i),i,dp);
-        }
-        b=fun(n,i+1,dp);
-        long x=Math.min(a,b);
-        dp[n][i]=(int)x;
-        return x;
+
+        int take = INF, skip;
+        take = 1 + fun(n - i * i, i, dp);
+        skip = fun(n, i + 1, dp);
+
+        return dp[n][i] = Math.min(take, skip);
     }
+
     public int numSquares(int n) {
-        int[][] dp = new int[n+1][101];
-        for(int[] rows : dp)
-        {
-            Arrays.fill(rows,-1);
+        int maxI = (int)Math.sqrt(n);
+        int[][] dp = new int[n + 1][maxI + 1];
+
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
         }
-        return (int)fun(n,1,dp);
+
+        return fun(n, 1, dp);
     }
 }
