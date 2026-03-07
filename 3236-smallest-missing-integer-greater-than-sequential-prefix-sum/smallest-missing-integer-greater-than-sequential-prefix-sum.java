@@ -20,7 +20,6 @@ class Solution {
             }
 
         }
-        System.out.println(sum);
         int a=sum;
         while (mp.getOrDefault(a, 0) != 0) {
                     a++;
