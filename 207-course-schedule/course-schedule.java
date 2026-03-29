@@ -1,48 +1,47 @@
 class Solution {
-    public boolean helper(ArrayList<ArrayList<Integer>> list,int[] visited, int[] inRec,int node)
-    {
-        visited[node]=1;
-        inRec[node]=1;
-        for(int i : list.get(node))
-        {
-            if(visited[i]==0)
-            {
-               if(helper(list, visited, inRec, i))
-                    return true;
-            }
-            else if(inRec[i]==1)
-            {
-                return true;
-            }
-        }
-        inRec[node]=0;
-        return false;
-    }
+
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
-        for(int i=0;i<numCourses;i++)
-        {
-            list.add(new ArrayList<>());
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            adj.add(new ArrayList<>());
         }
-        int n=prerequisites.length;
-        for(int i=0;i<n;i++)
-        {
-            list.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        int n = prerequisites.length;
+        for (int[] i : prerequisites) {
+            adj.get(i[1]).add(i[0]);
         }
+        int count = 0;
+        int[] inDegree = new int[numCourses];
         int[] visited = new int[numCourses];
-        int[] inRec = new int[numCourses];
-        for(int i=0;i<numCourses;i++)
-        {
-            visited[i]=0;
-            inRec[i]=0;
+        for (int i = 0; i < numCourses; i++) {
+            inDegree[i] = 0;
+            visited[i] = 0;
         }
-        for(int i=0;i<numCourses;i++)
-        {
-            if(visited[i]==0 && helper(list,visited,inRec,i))
-            {
-                return false;
+        for (int i = 0; i < numCourses; i++) {
+            for (int j : adj.get(i)) {
+                inDegree[j]++;
             }
         }
-        return true;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) {
+                q.offer(i);
+            }
+
+        }
+        while (!q.isEmpty()) {
+            int p = q.peek();
+            q.poll();
+            count++;
+            for (int i : adj.get(p)) {
+                inDegree[i]--;
+                if (inDegree[i] == 0) {
+                    q.offer(i);
+                }
+            }
+        }
+        if (count == numCourses) {
+            return true;
+        }
+        return false;
     }
 }
