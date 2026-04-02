@@ -29,6 +29,11 @@ class Solution {
             int i=a[1];
             int j=a[2];
             int dist=a[0];
+            if(isValid(i+1,j+1,n,grid,visited))
+            {
+                pq.offer(new int[]{dist+1,i+1,j+1});
+                visited[i+1][j+1]=1;
+            }
             if(i==n-1 && j==n-1 && grid[i][j]==0)
             {
                 return dist;
@@ -38,11 +43,7 @@ class Solution {
                 pq.offer(new int[]{dist+1,i+1,j});
                 visited[i+1][j]=1;
             }
-            if(isValid(i+1,j+1,n,grid,visited))
-            {
-                pq.offer(new int[]{dist+1,i+1,j+1});
-                visited[i+1][j+1]=1;
-            }
+            
             if(isValid(i+1,j-1,n,grid,visited))
             {
                 pq.offer(new int[]{dist+1,i+1,j-1});
