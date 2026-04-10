@@ -25,7 +25,7 @@ class Solution {
             {
                 if(visited[i][j]==0 && grid[i][j]==1)
                 {
-                    Queue<int[]> q = new LinkedList<>();
+                    Queue<int[]> q = new ArrayDeque<>();
                     int c=0;
                     q.offer(new int[]{i,j});
                     visited[i][j]=1;
