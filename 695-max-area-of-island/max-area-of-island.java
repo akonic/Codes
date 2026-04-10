@@ -1,12 +1,4 @@
 class Solution {
-    private boolean isValid(int x,int y,int n,int m)
-    {
-        if(x>=0 && x<n && y>=0 && y<m)
-        {
-            return true;
-        }
-        return false;
-    }
     public int maxAreaOfIsland(int[][] grid) {
         int[][] path = {{-1,0},{0,-1},{1,0},{0,1}};
         
@@ -39,7 +31,7 @@ class Solution {
                         {
                             int nx=x+dir[0];
                             int ny=y+dir[1];
-                            if(isValid(nx,ny,n,m) && grid[nx][ny]==1 && visited[nx][ny]==0)
+                            if((nx>=0 && ny>=0 && nx<n && ny<m) && grid[nx][ny]==1 && visited[nx][ny]==0)
                             {
                                 q.offer(new int[]{nx,ny});
                                 visited[nx][ny]=1;
