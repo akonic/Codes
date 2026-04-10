@@ -5,22 +5,16 @@ class Solution {
         int ans=0;
         int n=grid.length;
         int m=grid[0].length;
-
-        int[][] visited = new int[n][m];
-        for(int i=0;i<n;i++)
-        {
-            Arrays.fill(visited[i],0);
-        }
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(visited[i][j]==0 && grid[i][j]==1)
+                if(grid[i][j]==1)
                 {
                     Queue<int[]> q = new ArrayDeque<>();
                     int c=0;
                     q.offer(new int[]{i,j});
-                    visited[i][j]=1;
+                    grid[i][j]=0;
                     c++;
                     while(!q.isEmpty())
                     {
@@ -31,10 +25,10 @@ class Solution {
                         {
                             int nx=x+dir[0];
                             int ny=y+dir[1];
-                            if((nx>=0 && ny>=0 && nx<n && ny<m) && grid[nx][ny]==1 && visited[nx][ny]==0)
+                            if((nx>=0 && ny>=0 && nx<n && ny<m) && grid[nx][ny]==1 )
                             {
                                 q.offer(new int[]{nx,ny});
-                                visited[nx][ny]=1;
+                                grid[nx][ny]=0;
                                 c++;
                             }
                         }
