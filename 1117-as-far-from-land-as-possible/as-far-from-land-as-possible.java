@@ -20,6 +20,7 @@ class Solution {
                 }
             }
         }
+        if(q.isEmpty() || q.size() == n*m) return -1;
         int result = -1;
         while(!q.isEmpty())
         {
@@ -34,7 +35,7 @@ class Solution {
                 if(nx>=0 && ny>=0 && nx<n && ny<m && ans[nx][ny]==-1)
                 {
                     q.offer(nx*m + ny);
-                    ans[nx][ny]=ans[x][y]+Math.abs(x-nx)+Math.abs(y-ny);
+                    ans[nx][ny]=ans[x][y]+1;
                     result=Math.max(result,ans[nx][ny]);
                 }
             }
