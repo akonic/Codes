@@ -1,26 +1,27 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        TreeMap<Character,Integer> mp =new TreeMap<>();
+        int[] map = new int[128];
         int n=s.length();
-        int ans=0;
-        int len=0;
-        for(int i=0;i<n;i++)
+        if(n==0)
         {
-            Character p = s.charAt(i);
-            if(mp.containsKey(p))
-            {
-                ans=Math.max(len,ans);
-                int j = i-len;
-                while(mp.containsKey(p))
-                {
-                    len--;
-                    mp.remove(s.charAt(j));
-                    j++;
-                }
-            }
-                mp.put(p,1);len++;
+            return 0;
         }
-        ans=Math.max(len,ans);
+        int ans=1;
+        int i=0,j=1;
+        Arrays.fill(map,0);
+        map[s.charAt(i)]++;
+        while(j<n)
+        {
+            char c=s.charAt(j);
+            while(map[c]!=0)
+            {
+                map[s.charAt(i)]--;i++;
+            }
+            map[c]++;
+            ans=Math.max(ans,j-i+1);
+            j++;
+        }
+
         return ans;
     }
 }
