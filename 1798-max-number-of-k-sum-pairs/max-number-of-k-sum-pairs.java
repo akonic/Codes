@@ -10,8 +10,10 @@ class Solution {
         for(int i=0;i<n;i++)
         {
             int target=k-nums[i];
-            int p=mp.getOrDefault(target,0);
+          
             int q=mp.getOrDefault(nums[i],0);
+            if(q>=1){
+                  int p=mp.getOrDefault(target,0);
             if(target==nums[i])
             {
                 if(p>=2){
@@ -24,6 +26,7 @@ class Solution {
                  mp.put(target, mp.getOrDefault(target, 0) -1);
                  mp.put(nums[i], mp.getOrDefault(nums[i], 0) -1);
                  ans++;
+            }
             }
         }
         return ans;
