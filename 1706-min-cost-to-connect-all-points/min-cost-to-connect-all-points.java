@@ -4,24 +4,31 @@ class Solution {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
        int n=points.length;
        pq.offer(new int[]{0,0,-1});
-       int[] visited = new int[n];
-       Arrays.fill(visited,-1);
+       boolean[] visited = new boolean[n];
+       Arrays.fill(visited,false);
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[0] = 0;
        while(!pq.isEmpty())
        {
          int[] top = pq.poll();
          int a=top[0];
          int b=top[1];
-         int c=top[2];
-         if(visited[b]==1) continue ;
+         if(visited[b]) continue ;
          sum+=a;
-         visited[b]=1;
+         visited[b]=true;
          for(int j=0;j<n;j++)
          {
-            if(b!=j && visited[j]==-1)
-            {
-                int dist = Math.abs(points[b][0]-points[j][0])+ Math.abs(points[b][1]-points[j][1]);
-                pq.offer(new int[]{dist,j,b});
-            }
+           if(!visited[j])
+                {
+                    int d = Math.abs(points[b][0] - points[j][0])
+                          + Math.abs(points[b][1] - points[j][1]);
+                    if(d < dist[j])       
+                    {
+                        dist[j] = d;
+                        pq.offer(new int[]{d, j});
+                    }
+                }
          }
 
        }
