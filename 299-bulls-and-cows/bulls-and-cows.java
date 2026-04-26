@@ -2,7 +2,7 @@ class Solution {
     public String getHint(String secret, String guess) {
         int n=secret.length();
         int a=0,b=0;
-        int[] mp = new int[26];
+        int[] mp = new int[10];
         for(int i=0;i<n;i++)
         {
             Character ch = secret.charAt(i);
