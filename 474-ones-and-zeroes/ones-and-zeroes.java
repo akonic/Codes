@@ -1,11 +1,11 @@
 class Solution {
     int as;
-    private int helper(int[][] ls, int i, int n, int m,int[][][] dp) {
+    private int helper(int[][] ls, int i, int n, int m,short[][][] dp) {
         if(i>=ls.length)
         {
             return 0;
         }
-        if(dp[i][n][m]!=-1)
+        if(dp[i][n][m]!=0)
         {
             return dp[i][n][m];
         }
@@ -14,7 +14,7 @@ class Solution {
            a= 1+helper(ls, i + 1, n - ls[i][0], m - ls[i][1],dp);
         }
         b=helper(ls, i + 1, n, m,dp);
-        return dp[i][n][m]=Math.max(a,b);
+        return dp[i][n][m]=(short)Math.max(a,b);
     }
 
     public int findMaxForm(String[] strs, int m, int n) {
@@ -34,14 +34,7 @@ class Solution {
             ls[i][0] = a;
             ls[i][1] = b;
         }
-        int[][][] dp = new int[len+1][n+1][m+1];
-        for(int i=0;i<=len;i++)
-        {
-            for(int j=0;j<=n;j++)
-            {
-                Arrays.fill(dp[i][j],-1);
-            }
-        }
+       short[][][] dp = new short[len][n + 1][m + 1];
        return helper(ls, 0, n, m,dp);
        // return as;
     }
