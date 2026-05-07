@@ -5,7 +5,7 @@ class Solution {
         {
             return 0;
         }
-        if(dp[i][n][m]!=0)
+        if(dp[i][n][m]!=-1)
         {
             return dp[i][n][m];
         }
@@ -34,7 +34,11 @@ class Solution {
             ls[i][0] = a;
             ls[i][1] = b;
         }
-       short[][][] dp = new short[len][n + 1][m + 1];
+        short[][][] dp = new short[len][n + 1][m + 1];
+        for (short[][] layer : dp)
+            for (short[] row : layer)
+                Arrays.fill(row, (short) -1);
+
        return helper(ls, 0, n, m,dp);
        // return as;
     }
