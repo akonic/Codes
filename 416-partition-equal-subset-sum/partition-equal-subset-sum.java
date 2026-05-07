@@ -1,33 +1,33 @@
 class Solution {
-    public int checkPartition(int[] nums, int i, int W, int[][] dp) {
-        if (W == 0)
+    private int check(int[] nums, int i, int sum, int[][] dp) {
+        if (sum == 0) {
             return 1;
-        if (W < 0 || i >= nums.length)
-            return 0;
-
-        if (dp[W][i] != -1)
-            return dp[W][i];
-        if (checkPartition(nums, i + 1, W - nums[i], dp) == 1) {
-            return dp[W][i] = 1;
         }
-
-        return dp[W][i] = checkPartition(nums, i + 1, W, dp);
-
+        if (i >= nums.length || sum < 0) {
+            return 0;
+        }
+        if (dp[i][sum] != -1) {
+            return dp[i][sum];
+        }
+        dp[i][sum] = (check(nums, i + 1, sum - nums[i], dp) == 1 ||
+                check(nums, i + 1, sum, dp) == 1) ? 1 : 0;
+        return dp[i][sum];
     }
 
     public boolean canPartition(int[] nums) {
         int n = nums.length;
-        int W = 0;
-        for (int i : nums) {
-            W += i;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
         }
-        if (W % 2 != 0) {
+        if (sum % 2 == 1) {
             return false;
         }
-        int[][] dp = new int[W / 2 + 1][n + 1];
-        for (int[] rows : dp) {
-            Arrays.fill(rows, -1);
+        int[][] dp = new int[n + 1][sum / 2 + 1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(dp[i], -1);
         }
-        return checkPartition(nums, 0, W / 2, dp) == 1;
+       
+       return check(nums, 0, sum/2, dp) == 1;
     }
 }
