@@ -1,26 +1,33 @@
 class Solution {
-    public int fun(int[] nums,int i,int target,int x,int sum,int[][] dp)
-    {
+    private int helper(int[] nums, int target,int sum, int i,int[][] dp,int totalSum) {
+        if (i == nums.length && sum == target) {
+            return 1;
+        }
         if (i == nums.length) {
-            return x == target ? 1 : 0;
+            return 0;
         }
-        if (dp[i][sum + x] != -1) {
-            return dp[i][sum + x];
+        if(dp[i][totalSum+sum]!=-1)
+        {
+            return dp[i][totalSum+sum];
         }
-        return dp[i][sum + x]=fun(nums,i+1,target,x-nums[i],sum,dp) + fun(nums,i+1,target,x+nums[i],sum,dp);
+        int a=0,b=0;
+        a += helper(nums, target, sum + nums[i], i + 1,dp,totalSum);
+        b += helper(nums, target, sum - nums[i], i + 1,dp,totalSum);
+        return dp[i][totalSum+sum]=a+ b;
     }
+
     public int findTargetSumWays(int[] nums, int target) {
-        int n =nums.length;
-        int sum=0;
+        int totalSum=0;
+        int n = nums.length;
         for(int i : nums)
         {
-            sum+=i;
+            totalSum+=i;
         }
-       int[][] dp = new int[n][2 * sum + 1];
-        for(int[] rows : dp)
+        int[][] dp = new int[n+1][2*totalSum+1];
+        for(int[] i : dp)
         {
-            Arrays.fill(rows,-1);
+            Arrays.fill(i,-1);
         }
-        return fun(nums,0,target,0,sum,dp);
+        return helper(nums, target, 0, 0,dp,totalSum);
     }
 }
