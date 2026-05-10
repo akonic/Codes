@@ -17,6 +17,7 @@ class Solution {
     }
 
     void dfs(int[] nums, int i, int[] dp,int target) {
+    
         for (int j = i + 1; j < nums.length; j++) {
             if (nums[j] - nums[i] <= target && nums[j] - nums[i] >= -target
                     && dp[j] < dp[i] + 1) {
@@ -24,6 +25,7 @@ class Solution {
                 dfs(nums, j, dp,target);
             }
         }
+        return ;
     }
 
     public int maximumJumps(int[] nums, int target) {
