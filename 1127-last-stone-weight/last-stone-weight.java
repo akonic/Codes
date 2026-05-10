@@ -1,24 +1,21 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        int n=stones.length;
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)-> b-a);
-        int ans=0;
-        for(int i : stones)
-        {
+        int n = stones.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        for (int i : stones) {
             pq.offer(i);
         }
-        while(!pq.isEmpty())
-        {
+        while (pq.size() > 1) {
             int a = pq.poll();
-            if(pq.isEmpty())
-            {
-                return a;
-            }
-            else{
-                int b=pq.poll();
-                pq.offer(Math.abs(a-b));
+            int b = pq.poll();
+            if (b - a != 0) {
+                pq.offer(Math.abs(a - b));
             }
         }
-        return 0;
+        if (pq.isEmpty()) {
+            return 0;
+        } else {
+            return pq.peek();
+        }
     }
 }
