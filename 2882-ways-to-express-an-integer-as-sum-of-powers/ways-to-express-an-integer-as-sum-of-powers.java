@@ -25,10 +25,9 @@ class Solution {
         while(i<=n)
         {
             int p=(int)Math.pow(i,x);
-            if(p<=n)
-            {
-                ls.add(p);
-            }
+            if(p > n) break;
+            
+            ls.add(p);
             i++;
         }
         int len = ls.size();
