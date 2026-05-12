@@ -1,30 +1,32 @@
 class Solution {
-    public int fun(int[] coins, int amount, int index, int[][] dp) {
-        if (amount == 0) {
+     private int ways(int[] coins,int amount,int n,int i,int[][] dp)
+    {
+        if(amount==0)
+        {
             return 1;
         }
-        if (amount < 0 || index >= coins.length) {
+        if(i==n || amount<0)
+        {
             return 0;
         }
-        if (dp[index][amount] != -1) {
-            return dp[index][amount];
+        if(dp[amount][i]!=-1)
+        {
+            return dp[amount][i];
         }
-        int a = 0, b = 0;
+        int a=0;
+        if(amount-coins[i]>=0){
+         a = ways(coins,amount-coins[i],n,i,dp);}
+        int b= ways(coins,amount,n,i+1,dp);
 
-        a = fun(coins, amount - coins[index], index, dp);
-
-        b = fun(coins, amount, index + 1, dp);
-
-        return dp[index][amount] = a + b;
-
+        return dp[amount][i]=(a+b);
     }
-
     public int change(int amount, int[] coins) {
         int n = coins.length;
-        int[][] dp = new int[n + 1][amount + 1];
-        for (int[] rows : dp) {
-            Arrays.fill(rows, -1);
+        int[][] dp = new int[amount+1][n+1];
+        for(int[] j : dp)
+        {
+            Arrays.fill(j,-1);
         }
-        return fun(coins, amount, 0, dp);
+        return ways(coins,amount,n,0,dp);
     }
 }
