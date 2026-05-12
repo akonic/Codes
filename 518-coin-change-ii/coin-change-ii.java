@@ -5,7 +5,7 @@ class Solution {
         {
             return 1;
         }
-        if(i==n || amount<0)
+        if(i==n)
         {
             return 0;
         }
