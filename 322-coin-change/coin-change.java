@@ -1,37 +1,33 @@
 class Solution {
-    public long fun(int[] coins, int amount, int index,int[][] dp) {
-
-        if (amount == 0) {
+    private long helper(int[] coins,int amount,int i,long[][] dp)
+    {
+        if(amount == 0)
+        {
             return 0;
         }
-        if (amount < 0 || index >= coins.length) {
+        if(i>=coins.length || amount<0)
+        {
             return Integer.MAX_VALUE;
         }
-                if(dp[index][amount]!=-1)
+        if(dp[i][amount]!=-1)
         {
-            return dp[index][amount];
+            return dp[i][amount];
         }
-        long a=Integer.MAX_VALUE,b=Integer.MAX_VALUE;
-        if(amount-coins[index]>=0)
-        {
-            a=1 + fun(coins, amount - coins[index],index,dp);
-        }
-        b=fun(coins, amount, index + 1,dp);
-        return dp[index][amount]=(int)Math.min(a,b);
+        return dp[i][amount]=Math.min(1+helper(coins,amount-coins[i],i,dp),helper(coins,amount,i+1,dp));
     }
-
     public int coinChange(int[] coins, int amount) {
         int n=coins.length;
-        int[][] dp = new int[n+1][amount+1];
-        for(int[] rows : dp)
+        long[][] dp = new long[n+1][amount+1];
+        for(long[] i : dp)
         {
-            Arrays.fill(rows,-1);
+            Arrays.fill(i,-1);
         }
-        long a= fun(coins, amount, 0,dp);
-        if(a>=Integer.MAX_VALUE)
+        long p=helper(coins,amount,0,dp);
+        if(p==Integer.MAX_VALUE)
         {
             return -1;
         }
- return (int)a;
+        
+        return (int)p;
     }
 }
