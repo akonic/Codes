@@ -21,6 +21,7 @@ class Solution {
         return dp[i][target]=a;
     }
     public int combinationSum4(int[] nums, int target) {
+           Arrays.sort(nums);
         int n=nums.length;
         int[][] dp = new int[n+1][target+1];
         for(int[] i : dp){
