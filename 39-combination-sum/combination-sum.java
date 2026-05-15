@@ -1,7 +1,7 @@
 class Solution {
-    List<List<Integer>> ls = new ArrayList<>();
+   
 
-    private void helper(int[] candidates, int target, int i, List<Integer> temp) {
+    private void helper(List<List<Integer>> ls,int[] candidates, int target, int i, List<Integer> temp) {
         if (target == 0) {
             ls.add(new ArrayList<>(temp));
             return;
@@ -12,15 +12,15 @@ class Solution {
             if (newTarget < 0)
                 break;
             temp.add(candidates[j]);
-            helper(candidates, newTarget, j, temp);
+            helper(ls,candidates, newTarget, j, temp);
             temp.remove(temp.size() - 1);
         }
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        ls = new ArrayList<>();
+         List<List<Integer>> ls = new ArrayList<>();
         Arrays.sort(candidates);
-        helper(candidates, target, 0, new ArrayList<>());
+        helper(ls,candidates, target, 0, new ArrayList<>());
         return ls;
     }
 }
