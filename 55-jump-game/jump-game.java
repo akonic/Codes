@@ -5,12 +5,12 @@ class Solution {
         {
             return true;
         }
+        visited[i]=1;
         boolean a= false;
         for(int j=1;j<=nums[i];j++)
         {
             if(i+j<nums.length && visited[i+j]==-1)
             {
-                visited[i+j]=1;
                 a= a || helper(nums,i+j,visited);
             }
         }
@@ -19,9 +19,12 @@ class Solution {
     }
     public boolean canJump(int[] nums) {
         int n=nums.length;
-        int[] visited = new int[n];
-        Arrays.fill(visited,-1);
-        visited[0]=1;
-        return helper(nums,0,visited);
+        int jump=0;
+        for(int i=0;i<n;i++)
+        {
+            if(i>jump) return false;
+            jump=Math.max(jump,i+nums[i]);
+        }
+        return true;
     }
 }
