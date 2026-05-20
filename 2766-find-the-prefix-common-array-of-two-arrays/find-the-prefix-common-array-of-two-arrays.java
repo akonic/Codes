@@ -1,49 +1,23 @@
 class Solution {
     public int[] findThePrefixCommonArray(int[] A, int[] B) {
-        int n=A.length;
-        int[][] pre1 = new int[51][n];
-        int[][] pre2 = new int[51][n];
+        int n = A.length;
+        boolean[] pre1 = new boolean[51];
+        boolean[] pre2 = new boolean[51];
+        int[] ans = new int[n];
+        int c = 0;
 
-        for(int i=0;i<=50;i++)
-        {
-            int c=0;
-            for(int j=0;j<n;j++)
-            {
-                if(A[j]==i)
-                {
-                    c++;
-                }
-                pre1[i][j]=c;            
-            }
-        }
-        for(int i=0;i<=50;i++)
-        {
-            int c=0;
-            for(int j=0;j<n;j++)
-            {
-                if(B[j]==i)
-                {
-                    c++;
-                }
-                pre2[i][j]=c;            
-            }
-        }
+        for (int i = 0; i < n; i++) {
+            pre1[A[i]] = true;
+            pre2[B[i]] = true;
 
-        int[] ans= new int[n];
+            if (pre1[A[i]] && pre2[A[i]])
+                c++;
+            if (A[i] != B[i] && pre1[B[i]] && pre2[B[i]])
+                c++;
 
-        for(int i=0;i<n;i++)
-        {
-            int p=0;
-            for(int j=0;j<=50;j++)
-            {
-                if(pre1[j][i]!=0 && pre2[j][i]!=0)
-                {
-                    p++;
-                }
-            }
-            ans[i]=p;
+            ans[i] = c;
         }
         return ans;
-        
+
     }
 }
