@@ -2,9 +2,7 @@ class Solution {
     public int reductionOperations(int[] nums) {
         HashMap<Integer, Integer> mp = new HashMap<>();
         int n = nums.length;
-        int x = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
-            x = Math.min(x, nums[i]);
             mp.put(nums[i], mp.getOrDefault(nums[i], 0) + 1);
         }
         int ans = 0;
