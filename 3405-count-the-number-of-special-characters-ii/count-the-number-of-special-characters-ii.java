@@ -10,13 +10,11 @@ class Solution {
         for(int i=0;i<n;i++)
         {
             char ch = word.charAt(i);
-            if(Character.isUpperCase(ch) && check2[Character.toLowerCase(ch)-'a']==n)
-            {
-                check2[Character.toLowerCase(ch)-'a']=i;
-            }
-            else if(Character.isLowerCase(ch))
-            {
-                check[ch-'a']=i;
+            if (ch >= 'a') {
+                check[ch - 'a'] = i;
+            } else {
+                int p = ch - 'A';
+                if (check2[p] == n) check2[p] = i;
             }
         }
         for(int i=0;i<26;i++)
