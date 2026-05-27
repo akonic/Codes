@@ -19,14 +19,12 @@ class Solution {
                 check[ch-'a']=i;
             }
         }
-        for(int i=0;i<n;i++)
+        for(int i=0;i<26;i++)
         {
-            char ch = word.charAt(i);
-            char ch2=Character.toLowerCase(ch);
-            if(check2[ch2-'a']!=n && check[ch2-'a']!=-1 && check2[ch2-'a']>check[ch2-'a'])
+            if(check2[i]!=n && check[i]!=-1 && check2[i]>check[i])
             {
-                check2[ch2-'a']=n;
-                check[ch2-'a']=-1;
+                check2[i]=n;
+                check[i]=-1;
                 ans++;
             }
         }
