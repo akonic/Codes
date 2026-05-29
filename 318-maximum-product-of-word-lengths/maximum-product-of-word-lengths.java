@@ -20,7 +20,7 @@ class Solution {
     public int maxProduct(String[] words) {
         int ans=0;
         int n=words.length;
-        Arrays.sort(words);
+        //Arrays.sort(words);
         for(int i=n-1;i>=0;i--)
         {
             int len1=words[i].length();
