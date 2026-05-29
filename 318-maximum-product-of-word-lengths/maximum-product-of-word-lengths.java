@@ -1,16 +1,16 @@
 class Solution {
     private boolean hasCommon(String a,String b)
     {
-        int[] arr = new int[26];
+        boolean[] arr = new boolean[26];
         for(int i=0;i<a.length();i++)
         {
             char ch = a.charAt(i);
-            arr[ch-'a']++;
+            arr[ch-'a']=true;
         }
         for(int i=0;i<b.length();i++)
         {
             char ch = b.charAt(i);
-            if(arr[ch-'a']!=0)
+            if(arr[ch-'a'])
             {
                 return true;
             }
