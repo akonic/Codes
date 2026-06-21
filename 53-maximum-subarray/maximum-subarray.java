@@ -5,9 +5,8 @@ class Solution {
         for(int i=0;i<nums.length;i++)
         {
             if(currSum<0)
-            {
                 currSum=0;
-            }
+            
             currSum+=nums[i];
             ans=Math.max(ans,currSum);
         }
