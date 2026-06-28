@@ -6,12 +6,7 @@ class Solution {
         for(int i=1;i<n;i++)
         {
            
-           
-                if(arr[i]-arr[i-1]>1)
-                {
-                    arr[i]=arr[i-1]+1;
-                }
-            
+            arr[i]=Math.min(arr[i-1]+1,arr[i]);
         }
         return arr[n-1];
     }
