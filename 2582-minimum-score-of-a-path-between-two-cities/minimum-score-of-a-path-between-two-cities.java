@@ -1,4 +1,5 @@
 class Solution {
+  //  private dfs( List<List<int[]>> ls,)
     public int minScore(int n, int[][] roads) {
         List<List<int[]>> ls = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
@@ -13,7 +14,7 @@ class Solution {
         }
         int[] costs = new int[n + 1];
         Arrays.fill(costs,Integer.MAX_VALUE);
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Queue<int[]> pq = new LinkedList<>();
         pq.offer(new int[] { 1, Integer.MAX_VALUE });
         while (!pq.isEmpty()) {
             int[] top = pq.poll();
