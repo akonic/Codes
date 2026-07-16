@@ -52,14 +52,10 @@ class Solution {
         if (sum % 4 != 0) {
             return false;
         }
-        for(int i : nums)
-        {
-            if(i>sum/4)
-            {
-                return false;
-            }
-        }
         Arrays.sort(nums);
+         if (nums[n-1] > sum/4) {
+            return false;
+        }
         for(int i=0;i<n/2;i++)
         {
             int x=nums[i];
