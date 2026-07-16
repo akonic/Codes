@@ -17,6 +17,10 @@ class Solution {
         for (int k = 0; k < l; k++) {
             dist[k] += cookies[i];
             ans = Math.min(ans, check(cookies, i + 1, dist, l));
+            if(dist[k]==0)
+            {
+                break;
+            }
             dist[k] -= cookies[i];
         }
 
