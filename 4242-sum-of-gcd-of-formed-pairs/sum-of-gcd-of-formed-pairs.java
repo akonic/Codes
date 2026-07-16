@@ -1,13 +1,12 @@
 class Solution {
-    private long gcd(long a,long b)
-    {
-        if(a%b==0)
-        {
-            return b;
-        }
-
-        return gcd(b,a%b);
+private long gcd(long a, long b) {
+    while (b != 0) {
+        long t = a % b;
+        a = b;
+        b = t;
     }
+    return a;
+}
     public long gcdSum(int[] nums) {
         int n=nums.length;
         int[] preMax= new int[n];
