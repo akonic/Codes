@@ -12,9 +12,10 @@ class Solution {
         }
         int comb1 = 1, comb2 = 0;
         boolean flag = false;
-        if (nums[0] % 2 == 0) {
+        if (nums[0] % 2 == 0) 
             flag = true;
-            for (int i = 1; i < n; i++) {
+            
+        for (int i = 1; i < n; i++) {
                 if (flag && nums[i] % 2 == 1) {
                     comb1++;
                     flag = false;
@@ -23,17 +24,7 @@ class Solution {
                     flag = true;
                 }
             }
-        } else {
-            for (int i = 1; i < n; i++) {
-                if (flag==false && nums[i] % 2 == 0) {
-                    comb1++;
-                    flag = true;
-                } else if (flag  && nums[i] % 2 == 1) {
-                    comb1++;
-                    flag = false;
-                }
-            }
-        }
+        
         return Math.max(comb1,Math.max(odd,even));
     }
 }
