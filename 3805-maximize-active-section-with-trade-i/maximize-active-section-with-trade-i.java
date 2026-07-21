@@ -3,9 +3,10 @@ class Solution {
         List<Integer> ls = new ArrayList<>();
         int n = s.length();
         int count=0,c=0;
+        char[] ch = s.toCharArray();
         for(int i=0;i<n;i++)
         {
-            if(s.charAt(i)=='0')
+            if(ch[i]=='0')
             {
                 count++;
             }
