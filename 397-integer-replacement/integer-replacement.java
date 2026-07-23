@@ -2,7 +2,7 @@ class Solution {
     
     public int integerReplacement(int n) {
         int ans=0;
-        PriorityQueue<long[]> pq = new PriorityQueue<>((a,b)->Long.compare(a[0], b[0]));
+        Queue<long[]> pq = new LinkedList<>();
         Set<Long> visited = new HashSet<>();
         pq.offer(new long[]{0,n});
         while(!pq.isEmpty())
@@ -16,7 +16,7 @@ class Solution {
             }
             if (!visited.add(num))
                 continue;
-                
+
             if(num%2==0)
             {
                 pq.offer(new long[]{cost+1,num/2});
