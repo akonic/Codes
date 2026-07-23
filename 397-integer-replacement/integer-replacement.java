@@ -19,7 +19,7 @@ class Solution {
             }
             else{
                 pq.offer(new long[]{cost+1,num-1});
-                if(num<=Integer.MAX_VALUE){
+                if(num<=num+1000){
                 pq.offer(new long[]{cost+1,num+1});}
             }
         }
