@@ -55,14 +55,35 @@ class Solution {
         {
             return n;
         }
-        int[][][] dp = new int[n+1][n+2][3];
-        for(int[][] i : dp)
+
+        int ans=1,dir=2;
+        int k=1;
+        while(k<n && nums[k]==nums[k-1])
         {
-            for(int[] j : i)
+            k++;
+        }
+        if(k==n)
+        {
+            return ans;
+        }
+        if(k+1<n && nums[k]>nums[k-1])
+        {
+            dir=1;
+        }
+        k++;
+        for(int i=k;i<n;i++)
+        {
+            if(dir==1 && nums[i]<nums[i-1])
             {
-                Arrays.fill(j,-1);
+                dir=2;
+                ans++;
+            }
+            else if(dir==2 && nums[i]>nums[i-1])
+            {
+                dir=1;
+                ans++;
             }
         }
-        return helper(nums,0,-1,0,dp);
+        return ans+1;
     }
 }
