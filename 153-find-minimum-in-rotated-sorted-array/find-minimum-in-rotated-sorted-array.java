@@ -1,37 +1,21 @@
 class Solution {
-    public int findMin(int[] nums) {
-        int n=nums.length;
-        if(n==1)
+    private int index(int[] nums)
+    {
+        int l=0,r=nums.length-1;
+        while(l<r)
         {
-            return nums[0];
-        }
-        int i=0,j=n-1;
-        while(i<j)
-        {
-            if(nums[i]<nums[j])
+            int mid = l + (r-l)/2;
+            if(nums[mid]>nums[r])
             {
-                return nums[i];
+                l=mid+1;
             }
             else{
-                int mid=(i+j)/2;
-                
-                if(i==j-1)
-                {
-                    return Math.min(nums[i],nums[j]);
-                }
-                else if(nums[mid]<nums[i])
-                {
-                   
-                    j=mid;
-                }
-                else if(nums[mid]>nums[i])
-                {
-                   
-                    i=mid;
-                }
-                
+                r=mid;
             }
         }
-        return 0;
+        return nums[r];
+    }
+    public int findMin(int[] nums) {
+        return index(nums);
     }
 }
