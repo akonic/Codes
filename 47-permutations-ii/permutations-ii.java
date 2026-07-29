@@ -1,39 +1,30 @@
 class Solution {
-    private void helper(Set<List<Integer>> st, List<Integer> ls, int[] nums, boolean[] vis) {
-        if (ls.size() == vis.length) {
-            st.add(new ArrayList<>(ls));
-            return;
-        }
-        for (int i = 0; i < vis.length; i++) {
-            if (vis[i] == false) {
-                vis[i] = true;
-                ls.add(nums[i]);
-                helper(st, ls, nums, vis);
-                ls.remove(ls.size() - 1);
-                vis[i] = false;
-            }
-        }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        boolean[] vis = new boolean[nums.length];
+        helper(list, temp, nums, vis);
+        return list;
     }
 
-    public List<List<Integer>> permuteUnique(int[] nums) {
-        int n = nums.length;
-        if (n == 1) {
-            List<List<Integer>> ans = new ArrayList<>();
-            List<Integer> list = new ArrayList<>();
-            list.add(nums[0]);
-            ans.add(list);
-            return ans;
+    public void helper(List<List<Integer>> list, List<Integer> temp, int[] nums, boolean[] vis) {
+        if (temp.size() == nums.length) {
+            list.add(new ArrayList<Integer>(temp));
+            return;
         }
-        Set<List<Integer>> st = new HashSet<>();
 
-        boolean[] vis = new boolean[n];
-        List<Integer> ls = new ArrayList<>();
-        helper(st, ls, nums, vis);
-        List<List<Integer>> ans = new ArrayList<>();
-        for (List<Integer> temp : st) {
-            ans.add(new ArrayList<>(temp));
+        for (int i = 0; i < nums.length; i++) {
+            if (!vis[i]) {
+                if (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1]) {
+                    continue;
+                }
+                temp.add(nums[i]);
+                vis[i] = true;
+                helper(list, temp, nums, vis);
+                vis[i] = false;
+                temp.remove(temp.size() - 1);
+            }
         }
-        st.clear();
-        return ans;
     }
 }
