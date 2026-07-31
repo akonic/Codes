@@ -17,7 +17,7 @@ class Solution {
             
             ans += ((j / 8) + 1) * i;
             j++;
-        }ls.clear();
+        }
         return ans;
     }
 }
