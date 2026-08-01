@@ -7,30 +7,22 @@ class Solution {
         return ans;
     }
 
-    private int helper(int[] nums, int prev, int d, int i,int[][][] dp) {
+    private int helper(int[] nums, int prev, int d, int[][] dp) {
 
         if (d == 1) {
             int maxNum = findMax(nums, prev, nums.length - 1);
             return maxNum;
         }
-        if(dp[prev][d][i]!=-1)
-        {
-            return dp[prev][d][i];
+        if (dp[prev][d] != -1) {
+            return dp[prev][d];
         }
-        int make = Integer.MAX_VALUE;
-        int skip = Integer.MAX_VALUE;
-
-        int maxNum = findMax(nums, prev, i);
-        if (i + 1 < nums.length) {
-            make = helper(nums, i + 1, d - 1, i + 1,dp);
-            skip = helper(nums, prev, d, i + 1,dp);
+        int ans=Integer.MAX_VALUE;
+        for (int i = prev; i <=nums.length-d; i++) {
+            int maxNum = findMax(nums, prev, i);
+            ans = Math.min(ans,
+                maxNum + helper(nums, i + 1, d - 1, dp));
         }
-        if(make!=Integer.MAX_VALUE)
-        {
-            make+=maxNum;
-        }
-
-        return dp[prev][d][i] = Math.min(make, skip);
+        return dp[prev][d] = ans;
     }
 
     public int minDifficulty(int[] jobDifficulty, int d) {
@@ -38,14 +30,12 @@ class Solution {
         if (n < d) {
             return -1;
         }
-        int[][][] dp = new int[n+1][d+1][n+1];
-        for(int[][] i :dp)
-        {
-            for(int[] j : i)
-            {
-                Arrays.fill(j,-1);
-            }
+        int[][] dp = new int[n + 1][d + 1];
+        for (int[] i : dp) {
+
+            Arrays.fill(i, -1);
+
         }
-        return helper(jobDifficulty, 0, d, 0,dp);
+        return helper(jobDifficulty, 0, d, dp);
     }
 }
