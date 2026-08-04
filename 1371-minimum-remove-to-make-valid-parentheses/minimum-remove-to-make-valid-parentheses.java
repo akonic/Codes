@@ -16,8 +16,7 @@ class Solution {
                     } else {
                         ls.add(i);
                     }
-                }
-                else{
+                } else {
                     ls.add(i);
                 }
             }
@@ -27,18 +26,14 @@ class Solution {
             ls.add(st.peek()[1]);
             st.pop();
         }
-        String ans = "";
-        i = 0;
-        while (i < n) {
-            if (ch[i] == '(' || ch[i] == ')') {
-                if (!ls.contains(i)) {
-                    ans += ch[i];
-                }
-            } else {
-                ans += ch[i];
+        StringBuilder ans = new StringBuilder();
+
+        for (int j = 0; j < n; j++) {
+            if (!ls.contains(j)) {
+                ans.append(ch[j]);
             }
-            i++;
         }
-        return ans;
+
+        return ans.toString();
     }
 }
