@@ -2,7 +2,6 @@ class Solution {
     public int[] dailyTemperatures(int[] nums) {
         int n= nums.length;
         int[] ans = new int[n];
-        Arrays.fill(ans,0);
         Stack<Integer> st = new Stack<>();
         st.push(0);
         for(int i=1;i<n;i++)
