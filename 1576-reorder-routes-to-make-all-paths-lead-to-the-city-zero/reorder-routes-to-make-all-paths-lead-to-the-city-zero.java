@@ -11,18 +11,10 @@ class Solution {
             ls.get(i[1]).add(new int[]{i[0],0});
         }
         boolean[] reachable = new boolean[n];
-        Queue<Integer> q = new LinkedList<>();
+        Queue<Integer> q = new ArrayDeque<>();
         reachable[0]=true;
         int ans=0;
-        for(int[] i : ls.get(0))
-        {
-            if(i[1]==1)
-            {
-                ans++;
-            }
-            q.offer(i[0]);
-            reachable[i[0]]=true;
-        }
+        q.offer(0);
         while(!q.isEmpty())
         {
             int p = q.poll();
