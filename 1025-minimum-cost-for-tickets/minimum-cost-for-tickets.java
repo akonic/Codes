@@ -9,17 +9,17 @@ class Solution {
         }
         int skip = Integer.MAX_VALUE, notSkip = Integer.MAX_VALUE;
         if (last >= days[i]) {
-            for (int j = 0; j < 3; j++) {
-                int day = 0;
-                if (j == 0) {
-                    day = 1;
-                } else if (j == 1) {
-                    day = 7;
-                } else if (j == 2) {
-                    day = 30;
-                }
-                skip = Math.min(skip, costs[j] + helper(days, costs, i + 1, days[i] + day-1,dp));
-            }
+            // for (int j = 0; j < 3; j++) {
+            //     int day = 0;
+            //     if (j == 0) {
+            //         day = 1;
+            //     } else if (j == 1) {
+            //         day = 7;
+            //     } else if (j == 2) {
+            //         day = 30;
+            //     }
+            //     skip = Math.min(skip, costs[j] + helper(days, costs, i + 1, days[i] + day-1,dp));
+            // }
             notSkip = Math.min(notSkip, helper(days, costs, i + 1, last,dp));
         } else {
             for (int j = 0; j < 3; j++) {
