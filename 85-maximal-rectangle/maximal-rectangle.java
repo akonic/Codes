@@ -1,4 +1,27 @@
 class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        Stack<int[]> st = new Stack<>();
+        int ans=0;  
+        for(int i=0;i<n;i++)
+        {
+            int ind=i;
+            while(!st.isEmpty() && st.peek()[1]>heights[i])
+            {
+                int[] x = st.pop();
+                ind=Math.min(ind,x[0]);
+                ans=Math.max(ans,x[1]*(i-x[0]));
+                ans=Math.max(ans,x[1]);
+            }
+            st.push(new int[]{ind,heights[i]});
+        }
+        while(!st.isEmpty())
+        {
+            int[] x=st.pop();
+            ans=Math.max(ans,x[1]*(n-x[0]));
+        }
+        return ans;
+    }
     public int maximalRectangle(char[][] matrix) {
         int n = matrix.length;
         int m = matrix[0].length;
@@ -17,20 +40,10 @@ class Solution {
                 depth[i][j] = c;
             }
         }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (matrix[i][j] == '1') {
-                    int x = depth[i][j];
-                    int width = 0;
-                    int k = j;
-                    while (k < m && matrix[i][k] == '1') {
-                        x = Math.min(x, depth[i][k]);
-                        width++;
-                        ans = Math.max(ans, x * width);
-                        k++;
-                    }
-                }
-            }
+       
+        for(int i=0;i<n;i++)
+        {
+            ans=Math.max(ans,largestRectangleArea(depth[i]));
         }
 
         return ans;
