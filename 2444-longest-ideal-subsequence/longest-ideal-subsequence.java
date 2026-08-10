@@ -1,44 +1,24 @@
 class Solution {
-    private int helper(char[] ch,int i,int prev,int k)
-    {
-        if(i>=ch.length)
-        {
-            return 0;
-        }
-        int pick=0,skip=0;
-        if(prev==0)
-        {
-            pick=1+helper(ch,i+1,i,k);
-        }
-        else if(Math.abs(ch[prev-1] - 'a' - (ch[i-1]-'a'))<=k)
-        {
-            pick=1+helper(ch,i+1,i,k);
-        }
-        skip=helper(ch,i+1,prev,k);
 
-        return Math.max(skip,pick);
-    }
     public int longestIdealString(String s, int k) {
-        char[] ch = s.toCharArray();
-        int n= ch.length;
-        //return 1+helper(ch,1,0,k);
-        int[] dp = new int[n];
-        int[] freq = new int[26];
-        int[] till = new int[26];
-        int ans=0;
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<26;j++)
-            {
-                if(freq[j]>0 && Math.abs(ch[i]-'a' - j)<=k)
-                {
-                    dp[i]=Math.max(dp[i],1+till[j]);
+        int[] best = new int[26];
+        int ans = 0;
+
+        for (char c : s.toCharArray()) {
+            int idx = c - 'a';
+            int cur = 0;
+
+            for (int j = 0; j < 26; j++) {
+                if (Math.abs(idx - j) <= k) {
+                    cur = Math.max(cur, 1 + best[j]);
                 }
             }
-            freq[ch[i]-'a']++;
-            till[ch[i]-'a']=dp[i];
-            ans=Math.max(ans,dp[i]);
+
+            best[idx] = Math.max(best[idx], cur);
+            ans = Math.max(ans, cur);
         }
-        return 1+ans;
+
+        return ans ;
     }
+
 }
