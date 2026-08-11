@@ -1,30 +1,25 @@
 class Solution {
     public int missingInteger(int[] nums) {
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        int sum = nums[0], n = nums.length;
-        int p = Integer.MIN_VALUE, ans = Integer.MAX_VALUE;
-         for (int i = 0; i < n; i++) {
-            mp.put(nums[i], mp.getOrDefault(nums[i], 0) + 1);
-         }
-        for (int i = 1; i < n; i++) {
-            if (nums[i] == nums[i - 1] + 1) {
-                sum += nums[i];
-            } else {
-                p = Math.max(p, sum);
-                sum = nums[i];
-                int a=p;
-                while (mp.getOrDefault(a, 0) != 0) {
-                    a++;
-                }
-                return a;
-            }
-
+        int len = 1, sum = 0;
+        int n = nums.length;
+        Map<Integer, Integer> mp = new HashMap<>();
+        sum = nums[0];
+        mp.put(nums[0], 1);
+        int i=1;
+        while(i<n && nums[i]==nums[i-1]+1)
+        {
+            sum+=nums[i];
+            i++;len++;
         }
-        int a=sum;
-        while (mp.getOrDefault(a, 0) != 0) {
-                    a++;
-                }
+        for (int j = 1; j < n; j++) {
+            mp.put(nums[j], mp.getOrDefault(nums[j], 0) + 1);
+        }
 
-        return a;
+        while (mp.containsKey(sum)) {
+            sum++;
+        }
+
+        return sum;
+
     }
 }
