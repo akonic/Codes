@@ -1,28 +1,24 @@
 class Solution {
     private boolean check(char[] ch,int n)
     {
-        Stack<Character> st = new Stack<>();
+       int c=0;
         for(int i=0;i<n;i++)
         {
             if(ch[i]=='(')
             {
-                st.push(ch[i]);
+                c++;
             }
             else{
-                if(st.size()==0)
+                if(c>0)
                 {
-                    return false;
-                }
-                if(st.peek()!='(')
-                {
-                    return false;
+                    c--;
                 }
                 else{
-                    st.pop();
+                    return false;
                 }
             }
         }
-        if(st.size()!=0)
+        if(c!=0)
         {
             return false;
         }
