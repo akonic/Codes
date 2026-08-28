@@ -1,5 +1,5 @@
 class Solution {
-    private int helper(char[] ch, List<String> wordDict,int i,int j,int[][] dp)
+    private int helper(char[] ch, Set<String> dict,int i,int j,int[][] dp)
     {
         if(i==ch.length)
         {
@@ -14,11 +14,11 @@ class Solution {
             return dp[i][j];
         }
         int skip=0,pick=0;
-        if(wordDict.contains(new String(ch, i, j - i + 1)))
+        if(dict.contains(new String(ch, i, j - i + 1)))
         {
-            pick=helper(ch,wordDict,j+1,j+1,dp);
+            pick=helper(ch,dict,j+1,j+1,dp);
         }
-        skip = helper(ch,wordDict,i,j+1,dp);
+        skip = helper(ch,dict,i,j+1,dp);
 
         return dp[i][j] = Math.max(skip,pick);
     }
@@ -30,7 +30,7 @@ class Solution {
         {
             Arrays.fill(i,-1);
         }
-        if( helper(ch,wordDict,0,0,dp)==1)
+        if( helper(ch,new HashSet<>(wordDict),0,0,dp)==1)
         {
             return true;
         }
