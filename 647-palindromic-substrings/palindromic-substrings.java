@@ -13,6 +13,7 @@ class Solution {
         {
             if(ch[i]!=ch[j])
             {
+                dp[i][j]=0;
                 return false;
             }
             i++;j--;
