@@ -14,18 +14,37 @@ class Solution {
         ListNode prev = head;
         head = head.next;
         int c=1;
+        int[] ans = new int[2];
+        ans[0]=-1;
+        ans[1]=-1;
+        int x=Integer.MAX_VALUE;
+        int y=Integer.MIN_VALUE;
+        int u=Integer.MAX_VALUE;
+        int p=0;
+        int prv=-1;
         while(head!=null)
         {
             if(head.next!=null)
             {
                 if(head.val>prev.val && head.val > head.next.val)
-                {
-                   
+                {p++;
+                    y=Math.max(y,c);
+                    if(prv!=-1)
+                    {
+                        x=Math.min(x,c-prv);
+                    }
+                    prv=c;
+                    u=Math.min(u,c);
                     ls.add(c);
                 }
                 if(head.val<prev.val && head.val < head.next.val)
-                {
-                   
+                {p++;
+                     if(prv!=-1)
+                    {
+                        x=Math.min(x,c-prv);
+                    }
+                    prv=c;
+                   y=Math.max(y,c);u=Math.min(u,c);
                     ls.add(c);
                 }
 
@@ -33,27 +52,13 @@ class Solution {
             prev=head;
             head=head.next;
             c++;
-        }
-
-        int n= ls.size();
-        int[] ans = new int[2];
-        ans[0]=-1;
-        ans[1]=-1;
-        if(n==0 || n==1)
+        }      
+        if(p==0 || p==1)
         {
             return ans;
         }
-
-        int x=Integer.MAX_VALUE;
-        int y = Integer.MIN_VALUE;
-        for(int i=1;i<n;i++)
-        {
-            x=Math.min(x,ls.get(i)-ls.get(i-1));
-           // y=Math.max(y,ls.get(i)-ls.get(i-1));
-        }
-        y=ls.get(n-1)-ls.get(0);
         ans[0]=x;
-        ans[1]=y;
+        ans[1]=y-u;
         return ans;
     }
 }
