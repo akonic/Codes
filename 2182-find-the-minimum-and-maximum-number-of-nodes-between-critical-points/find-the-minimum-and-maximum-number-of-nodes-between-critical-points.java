@@ -10,7 +10,6 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-        List<Integer> ls = new ArrayList<>();
         ListNode prev = head;
         head = head.next;
         int c=1;
@@ -35,7 +34,7 @@ class Solution {
                     }
                     prv=c;
                     u=Math.min(u,c);
-                    ls.add(c);
+                    
                 }
                 if(head.val<prev.val && head.val < head.next.val)
                 {p++;
@@ -45,7 +44,7 @@ class Solution {
                     }
                     prv=c;
                    y=Math.max(y,c);u=Math.min(u,c);
-                    ls.add(c);
+                    
                 }
 
             }
