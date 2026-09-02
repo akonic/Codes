@@ -34,6 +34,10 @@ class Solution {
                 }
             }
         }
+        if(ans)
+        {
+            return true;
+        }
         boolean ans2=true;
         c=0;
          i=0;
