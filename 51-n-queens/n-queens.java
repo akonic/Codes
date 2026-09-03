@@ -1,5 +1,5 @@
 class Solution {
-    Set<List<String>> ans = new HashSet<>();
+    List<List<String>> ans = new ArrayList<>();
 
     private void build(boolean[][] row) {
 
@@ -73,11 +73,11 @@ class Solution {
             helper(n, 0, i, row);
 
         }
-        List<List<String>> p = new ArrayList<>();
-        for (List<String> u : ans) {
-            p.add(new ArrayList<>(u));
-        }
+        // List<List<String>> p = new ArrayList<>();
+        // for (List<String> u : ans) {
+        //     p.add(new ArrayList<>(u));
+        // }
 
-        return p;
+        return ans;
     }
 }
