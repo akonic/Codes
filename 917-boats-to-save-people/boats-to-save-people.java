@@ -4,7 +4,7 @@ class Solution {
         Arrays.sort(people);
         int n = people.length;
         int i=0,j=n-1;
-        while(i<=j && i<n && j>=0)
+        while(i<=j )
         {
             if(people[i]+people[j]<=limit)
             {
