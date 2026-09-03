@@ -1,5 +1,5 @@
 class Solution {
-    Set<List<String>> ans = new HashSet<>();
+    List<List<String>> ans = new ArrayList<>();
 
     private void build(boolean[][] row) {
 
@@ -53,9 +53,9 @@ class Solution {
                 helper(n - 1, i + 1, 0, row);
             } else {
                 for (int a = 0; a < row.length; a++) {
-                    if (check(row, i + 1, a)) {
+                    //if (check(row, i + 1, a)) {
                         helper(n - 1, i + 1, a, row);
-                    }
+                   // }
                 }
             }
             row[i][j] = false;
@@ -64,6 +64,7 @@ class Solution {
         return;
 
     }
+
 
     public int totalNQueens(int n) {
          ans.clear();
