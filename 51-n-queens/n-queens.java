@@ -18,24 +18,59 @@ class Solution {
         ans.add(new ArrayList(ls));
     }
 
-    private boolean check(boolean[][] board, int i, int j) {
-
-        for (int r = 0; r < i; r++) {
-            if (board[r][j])
-                return false;
-        }
-
-        for (int r = i - 1, c = j - 1; r >= 0 && c >= 0; r--, c--) {
-            if (board[r][c])
-                return false;
-        }
-
-        for (int r = i - 1, c = j + 1; r >= 0 && c < board.length; r--, c++) {
-            if (board[r][c])
-                return false;
-        }
-
-        return true;
+ private boolean check(boolean[][] row,int i,int j)
+    {
+        
+            for(int b=0;b<row.length;b++)
+            {
+                if(row[i][b])
+                {
+                    return false;
+                }
+            }
+            for(int b=0;b<row.length;b++)
+            {
+                if(row[b][j])
+                {
+                    return false;
+                }
+            }
+            int x=i,y=j;
+            while(x>=0 && y>=0)
+            {
+                if(row[x][y])
+                {
+                    return false;
+                }
+                x--;y--;
+            }
+            x=i;y=j;
+            while(x<row.length && y<row.length)
+            {
+                if(row[x][y])
+                {
+                    return false;
+                }
+                x++;y++;
+            } x=i;y=j;
+            while(x>=0 && y<row.length)
+            {
+                if(row[x][y])
+                {
+                    return false;
+                }
+                x--;y++;
+            } x=i;y=j;
+            while(x<row.length && y>=0)
+            {
+                if(row[x][y])
+                {
+                    return false;
+                }
+                x++;y--;
+            }
+            return true;
+        
     }
 
     private void helper(int n, int i, int j, boolean[][] row) {
@@ -73,10 +108,6 @@ class Solution {
             helper(n, 0, i, row);
 
         }
-        // List<List<String>> p = new ArrayList<>();
-        // for (List<String> u : ans) {
-        //     p.add(new ArrayList<>(u));
-        // }
 
         return ans;
     }
