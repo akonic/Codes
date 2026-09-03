@@ -53,9 +53,9 @@ class Solution {
                 helper(n - 1, i + 1, 0, row);
             } else {
                 for (int a = 0; a < row.length; a++) {
-                    if (check(row, i + 1, a)) {
+                    //if (check(row, i + 1, a)) {
                         helper(n - 1, i + 1, a, row);
-                    }
+                   // }
                 }
             }
             row[i][j] = false;
