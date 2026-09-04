@@ -1,46 +1,29 @@
 class Solution {
-    private boolean checkOdd(int[] nums)
-    {
-        int n=nums.length;
-        boolean odd=false;
+
+    public boolean uniformArray(int[] nums) {
+
+
+        int minOdd = Integer.MAX_VALUE;
+        int minEven = Integer.MAX_VALUE;
+        int n= nums.length;
+        int c=0,d=0;
         for(int i=0;i<n;i++)
         {
             if(nums[i]%2==1)
             {
-                odd=true;
+                c++;
+                minOdd=Math.min(minOdd,nums[i]);
             }
-            else if(nums[i]%2==0 && !odd)
-            {
-                return false;
+            else{
+                d++;
+                minEven=Math.min(minEven,nums[i]);
             }
         }
-        return true;
-    }
-    private boolean checkEven(int[] nums)
-    {  int n=nums.length;
-        boolean odd=false;
-        for(int i=0;i<n;i++)
-        {
-            if(nums[i]%2==1 )
-            {
-                if(!odd)
-                {
-                    return false;
-                }
-                odd=true;
-            }
-
-        }
-        return true;
-    }
-
-    public boolean uniformArray(int[] nums1) {
-        Arrays.sort(nums1);
-        if(checkOdd(nums1))
+        if(c==n || d==n)
         {
             return true;
         }
-        if(checkEven(nums1))
+        if(minOdd<minEven)
         {
             return true;
         }
