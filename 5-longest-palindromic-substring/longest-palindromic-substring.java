@@ -1,45 +1,63 @@
 class Solution {
-    private int check(char[] ch,int i,int j,int[][] dp)
-    {
-        if(i>=j)
-        {
+    private int check(char[] ch, int i, int j, int[][] dp) {
+        if (i >= j) {
             return 1;
         }
-        if(dp[i][j]!=-1)
-        {
+        if (dp[i][j] != -1) {
             return dp[i][j];
         }
-        int a =0;
-       if(ch[i]==ch[j])
-       {
-          a = check(ch,i+1,j-1,dp);
-       }
-        else{
-            a=0;
+        int a = 0;
+        if (ch[i] == ch[j]) {
+            a = check(ch, i + 1, j - 1, dp);
+        } else {
+            a = 0;
         }
-        return dp[i][j]=a;
+        return dp[i][j] = a;
     }
+
     public String longestPalindrome(String s) {
         char[] ch = s.toCharArray();
         int n = ch.length;
-        int ans=0;
-        String st ="";
-        int[][] dp = new int[n][n];
-        for(int[] i : dp)
-        {
-            Arrays.fill(i,-1);
-        }
+        int maxL=0;
+        String st ="";int ind=-1;
+        boolean[][] dp = new boolean[n][n];
         for(int i=0;i<n;i++)
         {
-            for(int j=i;j<n;j++)
+            dp[i][i]=true;
+        }
+        for(int L=2;L<=n;L++)
+        {
+            for(int i=0;i<n-L+1;i++)
             {
-                if(check(ch,i,j,dp)==1 && j-i+1>ans)
+                if(L==2)
                 {
-                   ans=j-i+1;
-                    st = s.substring(i,j+1);
+                    if(ch[i]==ch[i+L-1])
+                    {
+                        dp[i][i+L-1]=true;
+                         if(maxL<L)
+                        {
+                            maxL=L;
+                            ind=i;
+                        }
+                    }
                 }
+
+                else if(ch[i]==ch[i+L-1] && dp[i+1][i+L-1-1])
+                {
+                    dp[i][i+L-1]=true;
+                    if(maxL<L)
+                    {
+                        maxL=L;
+                        ind=i;
+                    }
+                }
+                
             }
         }
-        return st;
+        if(maxL==0)
+        {
+            return s.substring(0,1);
+        }
+        return s.substring(ind, ind + maxL);
     }
 }
