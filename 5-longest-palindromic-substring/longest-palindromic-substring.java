@@ -16,19 +16,15 @@ class Solution {
         int n = ch.length;
         int ans=0;
         String st ="";
+        
         for(int i=0;i<n;i++)
         {
             for(int j=i;j<n;j++)
             {
                 if(check(ch,i,j) && j-i+1>ans)
                 {
-                    ans=j-i+1;
-                    StringBuilder p = new StringBuilder();
-                    for(int u=i;u<=j;u++)
-                    {
-                        p.append(ch[u]);
-                    }
-                    st = p.toString();
+                   ans=j-i+1;
+                    st = s.substring(i,j+1);
                 }
             }
         }
