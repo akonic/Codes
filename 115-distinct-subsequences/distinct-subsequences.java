@@ -1,37 +1,18 @@
 class Solution {
-    private int helper(char[] ch,char[] bh,int i,int j,int[][] dp)
-    {
-        if(j==bh.length)
-        {
-            return 1;
-        }
-        if(i==ch.length)
-        {
-            return 0;
-        }
-        if(dp[i][j]!=-1)
-        {
-            return dp[i][j];
-        }
-        int a=0,b=0;
-        if(ch[i]==bh[j])
-        {
-            a=helper(ch,bh,i+1,j+1,dp);
-        }
-        b=helper(ch,bh,i+1,j,dp);
-
-        return dp[i][j]=a+b;
-    }
     public int numDistinct(String s, String t) {
-        char[] ch = s.toCharArray();
-        char[] bh = t.toCharArray();
-        int n=ch.length;
-        int m=bh.length;
-        int[][] dp = new int[n+1][m+1];
-        for(int[] i : dp)
-        {
-            Arrays.fill(i,-1);
+        int n = s.length(), m = t.length();
+
+        long[] dp = new long[m + 1];
+        dp[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = m; j >= 1; j--) {
+                if (s.charAt(i - 1) == t.charAt(j - 1)) {
+                    dp[j] += dp[j - 1];
+                }
+            }
         }
-        return helper(ch,bh,0,0,dp);
+
+        return (int) dp[m];
     }
 }
