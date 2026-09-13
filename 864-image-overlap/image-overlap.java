@@ -14,15 +14,15 @@ class Solution {
                 if(img2[i][j]==1){bs.add(new int[]{i,j});};
             }
         }
-        for(int[] i : ls)
-        {
-            for(int[] j : bs)
-            {
-                String key = (i[0]-j[0])+"_"+(i[1]-j[1]);
-                mp.put(key,mp.getOrDefault(key,0)+1);
-                ans=Math.max(ans,mp.get(key));
+        for (int[] a : ls) {
+            for (int[] b : bs) {
+                String key = (b[0] - a[0]) + "," + (b[1] - a[1]);
+                int cnt = mp.getOrDefault(key, 0) + 1;
+                mp.put(key, cnt);
+                ans = Math.max(ans, cnt);
             }
         }
+
         return ans;
     }
 }
