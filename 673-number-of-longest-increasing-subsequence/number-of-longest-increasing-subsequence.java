@@ -1,5 +1,5 @@
 class Solution {
-   
+
     private int[] helper(int[] nums, int i, int j, int[][][] dp) {
         if (i > nums.length || j > nums.length) {
             return new int[] { 0, 1 };
@@ -26,15 +26,35 @@ class Solution {
 
     public int findNumberOfLIS(int[] nums) {
         int n = nums.length;
-       
-        int[][][] dp = new int[n + 1][n + 1][2];
-        for (int[][] i : dp) {
-            for (int[] j : i) {
-                Arrays.fill(j, -1);
+        int[] dp = new int[n];
+        int[] cnt = new int[n];
+
+        Arrays.fill(dp, 1);
+        Arrays.fill(cnt, 1);
+
+        int max = 1;
+        int result = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) {
+                    if (dp[j] + 1 > dp[i]) {
+                        dp[i] = dp[j] + 1;
+                        cnt[i] = cnt[j];
+                    } else if (dp[j] + 1 == dp[i]) {
+                        cnt[i] += cnt[j];
+                    }
+                }
+            }
+
+            if (dp[i] > max) {
+                max = dp[i];
+                result = cnt[i];
+            } else if (dp[i] == max) {
+                result += cnt[i];
             }
         }
-        int[] x = helper(nums, 1, 0, dp);
-        //System.out.println(x);
-        return x[1];
+
+        return result;
     }
 }
