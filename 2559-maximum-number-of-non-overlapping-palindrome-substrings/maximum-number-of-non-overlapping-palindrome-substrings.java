@@ -15,27 +15,20 @@ class Solution {
                 }
             }
         }
-        List<int[]> ls = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (j - i + 1 >= k && dp[i][j]) {
-                    ls.add(new int[] { i, j });
+
+        int[] f = new int[n + 1];
+
+        for (int i = n - 1; i >= 0; i--) {
+            f[i] = f[i + 1]; 
+
+            for (int j = i + k - 1; j < n; j++) {
+                if (dp[i][j]) {
+                    f[i] = Math.max(f[i], 1 + f[j + 1]);
                 }
             }
         }
-        ls.sort((a, b) -> Integer.compare(a[1], b[1]));
 
-        int count = 0;
-        int lastEnd = -1;
-
-        for (int[] interval : ls) {
-            if (interval[0] > lastEnd) {
-                count++;
-                lastEnd = interval[1];
-            }
-        }
-
-        return count;
+        return f[0];
 
     }
 }
