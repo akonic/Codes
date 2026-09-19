@@ -26,23 +26,14 @@ class Solution {
            }
         }
         int count=0;
-        int i=0,j=0;
-        while(i<n && j<n)
+        int j=0;
+        for(int i=0;i<n;i++)
         {
-            int k = mp.get(nums[i]);
-            int mx=k;
-            while(j<mx && j<n)
+            j=Math.max(j,mp.get(nums[i]));
+            
+            if(j==i)
             {
-                j++;
-                mx=Math.max(mx,mp.get(nums[j]));
-            }
-            if(j==n)
-            {
-                count++;i++;
-            }
-            else{
-                count++;i=j+1;
-                j++;
+                count++;
             }
         }
         return powerMod(2,count-1);
