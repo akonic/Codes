@@ -3,22 +3,20 @@ class Solution {
         List<Integer> ls  = new ArrayList<>();
         char[] ch = s.toCharArray();
         int n = ch.length;
-        Map<Character,Integer> mp = new HashMap<>();
-        for(int i=n-1;i>=0;i--)
-        {
-            if(!mp.containsKey(ch[i]))
-            {
-                mp.put(ch[i],i);
-            }
-        }
+       int[] last = new int[26];
+
+        for (int i = 0; i < s.length(); i++)
+            last[s.charAt(i) - 'a'] = i;
+
+        
         int i=0,j=0;
         while(i<n && j<n)
         {
-            int k = mp.get(ch[i]);
+            int k = last[ch[i]-'a'];
             while(j<n && j<k)
             {
                 j++;
-                k=Math.max(k,mp.get(ch[j]));
+                k=Math.max(k,last[ch[j]-'a']);
             }
             if(j==n)
             {
