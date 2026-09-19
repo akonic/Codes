@@ -17,21 +17,24 @@ class Solution {
     }
     public int numberOfGoodPartitions(int[] nums) {
         int n = nums.length;
-        Map<Integer,List<Integer>> mp = new HashMap<>();
+        Map<Integer,Integer> mp = new HashMap<>();
         for(int i=n-1;i>=0;i--)
         {
-            mp.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+           if(!mp.containsKey(nums[i]))
+           {
+            mp.put(nums[i],i);
+           }
         }
         int count=0;
         int i=0,j=0;
         while(i<n && j<n)
         {
-            int k = mp.get(nums[i]).get(0);
+            int k = mp.get(nums[i]);
             int mx=k;
             while(j<mx && j<n)
             {
                 j++;
-                mx=Math.max( mp.get(nums[j]).get(0),mx);
+                mx=Math.max(mx,mp.get(nums[j]));
             }
             if(j==n)
             {
