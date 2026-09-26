@@ -6,18 +6,19 @@ class Solution {
 
         for (int i = 0; i < n; i++) {
 
-            Set<Integer> odds = new HashSet<>();
-            Set<Integer> evens = new HashSet<>();
+            Set<Integer> vis = new HashSet<>();
+            int even = 0, odd = 0;
+
             for (int j = i; j < n; j++) {
-                if (nums[j] % 2 == 0) {
-                    evens.add(nums[j]);
+                if (vis.add(nums[j])) {
+                    if ((nums[j] & 1) == 0)
+                        even++;
+                    else
+                        odd++;
                 }
-                if (nums[j] % 2 == 1) {
-                    odds.add(nums[j]);
-                }
-                if (evens.size() == odds.size()) {
+
+                if (even == odd)
                     ans = Math.max(ans, j - i + 1);
-                }
             }
         }
         return ans;
