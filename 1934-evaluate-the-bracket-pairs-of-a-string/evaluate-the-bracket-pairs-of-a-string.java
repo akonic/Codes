@@ -13,18 +13,18 @@ class Solution {
         {
             if(ch[i]=='(')
             {
-                StringBuilder temp = new StringBuilder();
-                i++;
-                while(ch[i]!=')')
+                int j=i+1;
+                while(ch[j]!=')')
                 {
-                    temp.append(ch[i]);
-                    i++;
+                    j++;
                 }
-                if(mp.containsKey(temp.toString())){
-                ans.append(mp.get(temp.toString()));}
+                String result = s.substring(i+1, j);
+                if(mp.containsKey(result)){
+                ans.append(mp.get(result));}
                 else{
                     ans.append("?");
                 }
+                i=j;
 
             }
             else{
