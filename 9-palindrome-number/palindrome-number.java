@@ -4,23 +4,18 @@ class Solution {
         {
             return false;
         }
-        List<Integer> ls = new ArrayList();
-        int temp = x;
+        long c=0;
+        int temp=x;
         while(temp>0)
         {
-            ls.add(temp%10);
+            c=c*10 + temp%10;
             temp/=10;
         }
-        int i=0,j=ls.size()-1;
-        while(i<j)
+        if(c==(long)x)
         {
-            if(ls.get(i)!=ls.get(j))
-            {
-                return false;
-            }
-            i++;j--;
+            return true;
         }
-        return true;
+        return false;
 
     }
 }
