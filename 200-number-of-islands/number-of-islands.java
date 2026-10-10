@@ -1,48 +1,42 @@
 class Solution {
-    void dfs(char[][] grid,int i,int j,int[][] visited,int n,int m)
-    {
-        visited[i][j]=1;
-        if(i+1<n && visited[i+1][j]==0 && grid[i+1][j]=='1')
-        {
-            dfs(grid,i+1,j,visited,n,m);
-        }
-        if(j+1<m && visited[i][j+1]==0 && grid[i][j+1]=='1')
-        {
-            dfs(grid,i,j+1,visited,n,m);
-        }
-        if(i-1>=0 && visited[i-1][j]==0 && grid[i-1][j]=='1')
-        {
-            dfs(grid,i-1,j,visited,n,m);
-        }
-        if(j-1>=0 && visited[i][j-1]==0 && grid[i][j-1]=='1')
-        {
-            dfs(grid,i,j-1,visited,n,m);
-        }
-
-    }
     public int numIslands(char[][] grid) {
-        int n=grid.length;
-        int m=grid[0].length;
-        int[][] visited = new int[n][m];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                visited[i][j]=0;
-            }
-        }
-        int c=0;
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(visited[i][j]==0 && grid[i][j]=='1')
-                {
-                    c++;
-                    dfs(grid,i,j,visited,n,m);
+        int ans = 0;
+
+        int n = grid.length;
+        int m = grid[0].length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '1') {
+                    ans++;
+                    Queue<int[]> q = new LinkedList<>();
+                    q.offer(new int[] { i, j });
+                    grid[i][j] = '0'; 
+                    while (!q.isEmpty()) {
+                        int[] top = q.poll();
+                        int x = top[0];
+                        int y = top[1];
+                        if (x + 1 < n && grid[x + 1][y] == '1') {
+                            grid[x + 1][y] = '0';
+                            q.offer(new int[] { x + 1, y });
+                        }
+                        if (x - 1 >= 0 && grid[x - 1][y] == '1') {
+                            grid[x - 1][y] = '0';
+                            q.offer(new int[] { x - 1, y });
+                        }
+                        if (y + 1 < m && grid[x][y + 1] == '1') {
+                            grid[x][y + 1] = '0';
+                            q.offer(new int[] { x, y + 1 });
+                        }
+                        if (y - 1 >= 0 && grid[x][y - 1] == '1') {
+                            grid[x][y - 1] = '0';
+                            q.offer(new int[] { x, y - 1 });
+                        }
+                    }
+
                 }
             }
-        }    
-        return c;
+        }
+
+        return ans;
     }
 }
