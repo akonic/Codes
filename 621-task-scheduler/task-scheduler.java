@@ -8,30 +8,27 @@ class Solution {
         Arrays.fill(last, -1);
         boolean flag = true;
         int ans = 0;
-        while (flag) {
-            flag = false;
-            List<int[]> ls  = new ArrayList<>();
-            for(int i=0;i<26;i++)
-            {
-                if(freq[i]>0)
-                {   flag=true;
-                    ls.add(new int[]{freq[i],i});
-                }
+        PriorityQueue<Integer> pq = new PriorityQueue<>(
+                (a, b) -> Integer.compare(b, a));
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] > 0) {
+                pq.offer(freq[i]);
             }
-            ls.sort((a, b) -> Integer.compare(b[0], a[0]));
-            for(int[] i : ls)
-            {
-                if(last[i[1]]==-1 || last[i[1]]+n<ans)
-                {
-                    freq[i[1]]--;
-                    last[i[1]]=ans;
-                    break;
-                }
-            }
-
-            ans++;
-
         }
-        return ans - 1;
+        Queue<int[]> q = new LinkedList<>();
+        while (!pq.isEmpty() || !q.isEmpty()) {
+            ans++;
+            if (!pq.isEmpty()) {
+                int x = pq.poll();
+                x--;
+                if (x != 0) {
+                    q.offer(new int[] { ans + n, x });
+                }
+            }
+            while (!q.isEmpty() && q.peek()[0] == ans) {
+                pq.offer(q.poll()[1]);
+            }
+        }
+        return ans;
     }
 }
