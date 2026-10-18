@@ -1,24 +1,19 @@
 class Solution {
     public long taskSchedulerII(int[] tasks, int space) {
-        int i = 0;
         int n = tasks.length;
-        long ans = 0;
+        long ans=0;
         Map<Integer, Long> mp = new HashMap<>();
-        while (i < n) {
+        for(int i : tasks) {
 
-            if (!mp.containsKey(tasks[i])) {
-                
-                mp.put(tasks[i], ans);
-                i++;
+            if (!mp.containsKey(i)) {              
+              mp.put(i, ans);               
             } else {
-                Long p = mp.get(tasks[i]);
+                Long p = mp.get(i);
                 Long x = p + space + 1;
                 if (ans < x) {
                     ans += (x - ans);
-                }
-              
-                mp.put(tasks[i], ans);
-                i++;
+                }          
+                mp.put(i, ans);
             }
             ans++;
         }
