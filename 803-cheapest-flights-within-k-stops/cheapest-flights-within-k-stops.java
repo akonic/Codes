@@ -1,39 +1,34 @@
 class Solution {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-        List<List<int[]>> adj = new ArrayList<>();
+        List<List<int[]>> ls = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
+            ls.add(new ArrayList<>());
         }
-        for (int i = 0; i < flights.length; i++) {
-            int sr = flights[i][0];
-            int dt = flights[i][1];
-            int cost = flights[i][2];
-            adj.get(sr).add(new int[] { dt, cost });
+        for (int[] i : flights) {
+            ls.get(i[0]).add(new int[] { i[1], i[2] });
         }
-        int[] minStops = new int[n];
-        Arrays.fill(minStops, Integer.MAX_VALUE); 
-
-        pq.offer(new int[] { 0, src, 0 });
-        while (!pq.isEmpty()) {
-            int[] top = pq.poll();
-            int cost = top[0];
-            int node = top[1];
-            int stops = top[2];
-
-            if (node == dst)
-                return cost;
-            if (stops == k + 1)
-                continue;
-
-            if (stops >= minStops[node])
-                continue; 
-            minStops[node] = stops; 
-
-            for (int[] temp : adj.get(node)) {
-                pq.offer(new int[] { cost + temp[1], temp[0], stops + 1 });
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] { src, 0 });
+        int steps = 0;
+        int[] cost = new int[n];
+        Arrays.fill(cost, Integer.MAX_VALUE);
+        cost[src] = 0;
+        while (!q.isEmpty() && steps <= k) {
+            steps++;
+            int sz = q.size();
+            while (sz > 0) {
+                sz--;
+                int[] top = q.poll();
+                int node = top[0];
+                int cst = top[1];
+                for (int[] i : ls.get(node)) {
+                    if (cst + i[1] < cost[i[0]]) {
+                        cost[i[0]] = cst + i[1];
+                        q.offer(new int[] { i[0], cst + i[1] });
+                    }
+                }
             }
         }
-        return -1;
+        return cost[dst] == Integer.MAX_VALUE ? -1 : cost[dst];
     }
 }
