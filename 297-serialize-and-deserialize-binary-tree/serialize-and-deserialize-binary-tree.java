@@ -14,7 +14,7 @@ public class Codec {
         return sb.toString();
     }
     private void build(TreeNode node, StringBuilder sb) {
-        if (node == null) { sb.append("#,"); return; }
+        if (node == null) { sb.append("N,"); return; }
         sb.append(node.val).append(',');
         build(node.left, sb);
         build(node.right, sb);
@@ -25,7 +25,7 @@ public class Codec {
     }
     private TreeNode parse(Queue<String> q) {
         String s = q.poll();
-        if (s.equals("#")) return null;
+        if (s.equals("N")) return null;
         TreeNode node = new TreeNode(Integer.parseInt(s));
         node.left  = parse(q);
         node.right = parse(q);
