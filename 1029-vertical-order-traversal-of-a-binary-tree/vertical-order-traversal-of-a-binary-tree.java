@@ -14,36 +14,30 @@
  * }
  */
 class Solution {
-       Map<String, List<Integer>> mp = new TreeMap<>();
+    Map<Integer, TreeMap<Integer, List<Integer>>> mp = new TreeMap<>();
 
     private void traverse(TreeNode node, int x, int y) {
         if (node == null) {
             return;
         }
         traverse(node.left, x - 1, y + 1);
-        mp.computeIfAbsent(String.format("%04d-%04d", x + 1000, y + 1000),
-                           k -> new ArrayList<>()).add(node.val);
+        mp.computeIfAbsent(x, k -> new TreeMap<>())
+                .computeIfAbsent(y, k -> new ArrayList<>())
+                .add(node.val);
         traverse(node.right, x + 1, y + 1);
     }
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         mp.clear();
         traverse(root, 0, 0);
-
         List<List<Integer>> ls = new ArrayList<>();
-        String prevX = null;
-        List<Integer> col = null;
-
-        for (Map.Entry<String, List<Integer>> e : mp.entrySet()) {
-            String currX = e.getKey().substring(0, 4);
-            if (!currX.equals(prevX)) {       
-                col = new ArrayList<>();
-                ls.add(col);
-                prevX = currX;
+        for (TreeMap<Integer, List<Integer>> col : mp.values()) {
+            List<Integer> colList = new ArrayList<>();
+            for (List<Integer> cell : col.values()) {
+                Collections.sort(cell);
+                colList.addAll(cell);
             }
-            List<Integer> cell = e.getValue();
-            Collections.sort(cell);            
-            col.addAll(cell);
+            ls.add(colList);
         }
         return ls;
     }
