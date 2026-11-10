@@ -5,14 +5,14 @@ class Solution {
         for (int i : nums) {
             mp.put(i, mp.getOrDefault(i, 0) + 1);
         }
-        Map<Integer, List<Integer>> m = new HashMap<>();
+        Map<Integer, Integer> m = new HashMap<>();
         for (Map.Entry<Integer, Integer> entry : mp.entrySet()) {
-
-            m.computeIfAbsent(entry.getValue(), k -> new ArrayList<>()).add(entry.getKey());
+            int i = entry.getValue();
+          m.put(i, m.getOrDefault(i, 0) + 1);
         }
 
         for (int x : nums) {
-            if (m.get(mp.get(x)).size() == 1) {
+            if (m.get(mp.get(x)) == 1) {
                 return x;
             }
         }
