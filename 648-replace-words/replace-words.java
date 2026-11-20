@@ -1,29 +1,22 @@
 class Solution {
     public String replaceWords(List<String> dictionary, String sentence) {
-        Map<String, Integer> mp = new HashMap<>();
-        for (String s : dictionary) {
-            mp.put(s, 1);
-        }
-        List<String> words = new ArrayList<>(Arrays.asList(sentence.split(" ")));
-        List<String> ans = new ArrayList<>();
-        int n = words.size();
-        for (int i = 0; i < n; i++) {
-            char[] arr = words.get(i).toCharArray();
-            int p = arr.length;
-            StringBuilder a = new StringBuilder();
-            boolean f = false;
-            for (int j = 0; j < p; j++) {
-                a.append(arr[j]);
-                if (mp.containsKey(a.toString())) {
-                    ans.add(a.toString());
-                    j = 10000;
-                    f = true;
-                }
+        Set<String> set = new HashSet<>(dictionary);
+        int maxLen = 0;
+        for (String s : dictionary) maxLen = Math.max(maxLen, s.length());
+
+        String[] words = sentence.split(" ");
+        StringBuilder sb = new StringBuilder(sentence.length());
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0) sb.append(' ');
+            String w = words[i];
+            int lim = Math.min(w.length(), maxLen);
+            String best = w;
+            for (int j = 1; j <= lim; j++) {
+                String pre = w.substring(0, j);
+                if (set.contains(pre)) { best = pre; break; }
             }
-            if (!f) {
-                ans.add(a.toString());
-            }
+            sb.append(best);
         }
-        return String.join(" ", ans);
+        return sb.toString();
     }
 }
