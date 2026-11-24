@@ -8,7 +8,7 @@ class Solution {
                 g = gcd(g, nums[j]);
                 l = lcm(l, nums[j]);
                 if (p == g * l) best = Math.max(best, j - i + 1);
-                //if (p > 25200) break;   
+               
             }
         }
         return best;
